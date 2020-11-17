@@ -1,22 +1,21 @@
 import subprocess
 from datetime import datetime
 
-def call_slim(dv):
+def call_slim(dv,timing):
     """
     Sends decision variables to SLiM, early and late fitness returned in array
 
     :param dv (devision variables) , 0 -> pop, 1 -> sel_co
     :return: early fitness, late fitness
     """
-    cmd = "slim -d selectionstrength=" + str(dv[1]) + " -d pop_size="+str(dv[0])+" fish_simulation.slim"
+    cmd = "slim -d selectionstrength=" + str(dv[1]) + " -d pop_size="+str(dv[0])+" -d early="+str(timing[0])
+    cmd += " -d late="+str(timing[1]) +" fish_simulation.slim"
     process = subprocess.run(cmd, shell=True, check=True, timeout=10,stdout=subprocess.PIPE)
     f = []
     for x in process.stdout.split():
         x = x.decode("utf-8")
         if "#" in x:
-            for z in x:
-                if z.isdigit():
-                    f.append(z)
+            f.append((x.replace("#","").replace('"',"")))
     return f
 
 def save_output(a):
@@ -48,7 +47,7 @@ def example_use():
     for i in range(domain_pop[0],domain_pop[1]):
         j = domain_sel_cof[0]
         while j < domain_sel_cof[1]:
-            early_fit, late_fit = call_slim([i, round(j, 1)])
+            early_fit, late_fit = call_slim([i, round(j, 1)],[100,4000])
             res.append([i, round(j, 1), early_fit, late_fit])
             j += domain_sel_cof[2]
     # Save to out.txt
@@ -63,6 +62,7 @@ def bench_mark_slim(size):
     print("Total seconds for "+ str(size)+ " executions: "+ str(diff.total_seconds()))
     print("AVG seconds per call for " + str(size) + " executions: " + str(diff.total_seconds()/size))
 
-
+example_use()
+#print(call_slim([100,0.1],[100,4000]))
 #bench_mark_slim(100)
 #example_use()
