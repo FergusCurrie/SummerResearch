@@ -35,8 +35,7 @@ def save_output(a):
 
 def example_use():
     """
-    Example use of call_sim and save_output, loops through a range
-    Adjust domain to see change
+    Example use of call_sim and save_output, loops through a range - can use for a brute force bench mark potentially
     :return: none
     """
     # Set vars, results and domains of decision variables
@@ -54,6 +53,11 @@ def example_use():
     save_output(res)
 
 def bench_mark_slim(size):
+    """
+    HAving a look at execution times, dw about this
+    :param size:
+    :return:
+    """
     start = datetime.now()
     for i in range(1,size):
         call_slim([size,0.5])
@@ -62,7 +66,19 @@ def bench_mark_slim(size):
     print("Total seconds for "+ str(size)+ " executions: "+ str(diff.total_seconds()))
     print("AVG seconds per call for " + str(size) + " executions: " + str(diff.total_seconds()/size))
 
-example_use()
-#print(call_slim([100,0.1],[100,4000]))
-#bench_mark_slim(100)
+
+"""
+
+"""
+
 #example_use()
+
+# Below is an example use of the call to slim, return value looks like : ['1.31454', '8.26002']
+pop = 100
+selc_coef = 0.1
+early = 100
+late = 4000
+print(call_slim([pop,selc_coef],[early,late]))
+
+
+
