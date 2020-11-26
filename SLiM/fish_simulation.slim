@@ -16,7 +16,7 @@ fitness(m2) { return 1.0; }
 1: late() {
  inds = sim.subpopulations.individuals;
  phenotypes = inds.sumOfMutationsOfType(m2);
- inds.fitnessScaling = 1.5 - (phenotypes - 10.0)^2 * 0.005;
+ inds.fitnessScaling = 1.5 - (phenotypes - 10.0)^2 * 0.005; // prev 1.5 - curr
 
 if (sim.generation == early)
  catn("#" + mean(phenotypes) + "#");
