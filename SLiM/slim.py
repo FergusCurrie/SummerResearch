@@ -1,5 +1,9 @@
 import subprocess
+from execution_time import ExecutionTime
+
 from datetime import datetime
+
+e = ExecutionTime()
 
 def call_slim(population,select_coeff,ear,late,seed):
     """
