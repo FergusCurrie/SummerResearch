@@ -36,8 +36,8 @@ def run_nsga():
     # Define range for decision variables
     range_pop = [0,100]
     range_selcoe = [0,1.0]
-    algorithm = NSGA2(pop_size=30)
-    termination = get_termination("n_gen",30)
+    algorithm = NSGA2(pop_size=100)
+    termination = get_termination("n_gen",100)
     problem = FunctionalProblem(2,my_objs,xl=np.array([1,0]),xu=np.array([1000,1]))
     result = minimize(problem,algorithm,termination,seed=132,save_history=True,verbose=True)
     plot = Scatter()
