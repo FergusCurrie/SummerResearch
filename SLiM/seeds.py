@@ -6,7 +6,7 @@ def make_sets():
     # Seed init and increment
     z = 346040 # Current seed
     zi = 344 # Seed increment
-    num_seeds = 30
+    num_seeds = 5
 
     # Seed slim training
     file = open("seeds/slim_seed_train.txt", "w")
@@ -24,7 +24,7 @@ def make_sets():
 
     # Seed algorithm
     file = open("seeds/algorithm_seed.txt", "w")
-    for x in range(0, num_seeds):
+    for x in range(0, 10):
         file.write(str(z))
         z += zi
         file.write("\n")

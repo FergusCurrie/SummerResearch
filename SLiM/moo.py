@@ -18,36 +18,35 @@ from slim import early_fitness, late_fitness
 e = ExecutionTime()
 
 my_objs = [
-    lambda x: early_fitness(x),
-    lambda x: late_fitness(x)
-
+    lambda x: -early_fitness(x),
+    lambda x: -late_fitness(x)
 ]
 
 # cv = constraint violation
-def save_front(z):
+def save_front(z,zz,s):
     time = datetime.now()
-    file = open("results/resultsX_"+str(time)+".txt","w")
+    file = open("results/"+(str(s).strip())+"_results.txt","w")
     for x in z:
         file.write("")
-        file.write(str(x))
+        file.write(str(x[0]))
+        file.write(",")
+        file.write(str(x[1]))
         file.write("\n")
+    file.write("#")
+    file.write("\n")
+
+    for x in zz:
+        file.write("")
+        file.write(str(x[0]))
+        file.write(",")
+        file.write(str(x[1]))
+        file.write("\n")
+
 @e.timeit
-def run_nsga():
+def run_nsga(s):
     # Define range for decision variables
-    range_pop = [0,100]
-    range_selcoe = [0,1.0]
-    algorithm = NSGA2(pop_size=100)
-    termination = get_termination("n_gen",100)
-    problem = FunctionalProblem(2,my_objs,xl=np.array([1,0]),xu=np.array([1000,1]))
-    result = minimize(problem,algorithm,termination,seed=132,save_history=True,verbose=True)
-    plot = Scatter()
-    plot.add(result.F, color="red")
-    plot.show()
-    save_front(result.X)
-
-
-
-print("Running NSGA")
-
-run_nsga()
-print(e.logtime_data)
+    algorithm = NSGA2(pop_size=50)
+    termination = get_termination("n_gen",40)
+    problem = FunctionalProblem(1,my_objs,xl=np.array([0]),xu=np.array([1]))
+    result = minimize(problem,algorithm,termination,seed=int(s),save_history=True,verbose=True)
+    save_front(result.F,result.X,s)
