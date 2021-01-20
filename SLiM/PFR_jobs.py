@@ -7,13 +7,18 @@ import datetime
 def sub_job():
     os.system("""
     INPUT=/workspace/hrafxc
-    OUTPUT=0.1_raw_fastqc
+
+    OUTPUT="results_test"
     
     mkdir -p $OUTPUT
-    module load  SLiM/3.1
+   
+          
     
-    echo slim -d selectionstrength=0.8 seed 1 fish_simulation.slim | asub -j {$OUTPUT}/fastqc_analysis      
-    
+    for x in {1..1}
+    do 
+	bsub -o ${OUTPUT}/${x}.out /software/bioinformatics/slim-3.1/slim -d selectionstrength=0.8 -seed $x fish_simulation.slim;
+    done 
+	
     """)
 
 def make_all_jobs():
@@ -27,7 +32,7 @@ def make_all_jobs():
 
 
 
-if True:
+if False:
     make_all_jobs()
 if True:
     sub_job()
