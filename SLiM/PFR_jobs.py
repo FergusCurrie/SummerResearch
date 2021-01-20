@@ -4,7 +4,9 @@ import pandas as pd
 import os
 import datetime
 
-def sub_job():
+
+
+def sub_job(seed):
     os.system("""
     INPUT=/workspace/hrafxc
 
@@ -12,14 +14,15 @@ def sub_job():
     
     mkdir -p $OUTPUT
    
-          
-    
-    for x in {1..1}
+    for x in {{v1}..{v1}}
     do 
-	bsub -o ${OUTPUT}/${x}.out /software/bioinformatics/slim-3.1/slim -d selectionstrength=0.8 -seed $x fish_simulation.slim;
+	bsub -o {v2} /software/bioinformatics/slim-3.1/slim -d selectionstrength=0.8 -seed $x fish_simulation.slim;
     done 
 	
-    """)
+    """.format(
+        v1 = seed,
+        v2 = "${OUTPUT}/${x}.out"
+    ))
 
 def make_all_jobs():
     # Makes system calls of a bunch of jobs
@@ -27,7 +30,7 @@ def make_all_jobs():
     os.mkdir(path)
     for seed in open("seeds/algorithm_seed.txt"):
         seed = int(seed.strip())
-
+        sub_job(seed)
         # Make a job
 
 
