@@ -1,0 +1,100 @@
+// Initial random seed:
+323
+
+// RunInitializeCallbacks():
+initializeMutationRate(1e-07);
+initializeMutationType(1, 0.5, "f", 0);
+initializeMutationType(2, 0.5, "n", 0.8, 0.5);
+initializeGenomicElementType(1, m1, 1);
+initializeGenomicElementType(2, m2, 1);
+initializeGenomicElement(g1, 0, 20000);
+initializeGenomicElement(g2, 20001, 30000);
+initializeGenomicElement(g1, 30001, 99999);
+initializeRecombinationRate(1e-08);
+
+// Starting run at generation <start>:
+1 
+
+#0.252141#
+#0.464177#
+
+------------------------------------------------------------
+Sender: OpenLava System <openlava@aklppb41>
+Subject: Job 832490: </software/bioinformatics/slim-3.1/slim -d selectionstrength=0.8 -seed 323 fish_simulation.slim> Done
+
+Job </software/bioinformatics/slim-3.1/slim -d selectionstrength=0.8 -seed 323 fish_simulation.slim> was submitted from host <aklppf31> by user <hrafxc>.
+Job was executed on host(s) <aklppb41>, in queue <lowpriority>, as user <hrafxc>.
+</home/hrafxc> was used as the home directory.
+</workspace/hrafxc/SummerResearch/SLiM> was used as the working directory.
+Started at Thu Jan 21 12:38:45 2021
+Results reported at Thu Jan 21 12:38:46 2021
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/software/bioinformatics/slim-3.1/slim -d selectionstrength=0.8 -seed 323 fish_simulation.slim
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :      0.09 sec.
+    Max Memory :         3 MB
+    Max Swap   :       157 MB
+
+    Max Processes  :         1
+
+The output (if any) is above this job summary.
+
+// Initial random seed:
+323
+
+// RunInitializeCallbacks():
+initializeMutationRate(1e-07);
+initializeMutationType(1, 0.5, "f", 0);
+initializeMutationType(2, 0.5, "n", 0.8, 0.5);
+initializeGenomicElementType(1, m1, 1);
+initializeGenomicElementType(2, m2, 1);
+initializeGenomicElement(g1, 0, 20000);
+initializeGenomicElement(g2, 20001, 30000);
+initializeGenomicElement(g1, 30001, 99999);
+initializeRecombinationRate(1e-08);
+
+// Starting run at generation <start>:
+1 
+
+#0.252141#
+#0.464177#
+
+------------------------------------------------------------
+Sender: OpenLava System <openlava@wkoppb42>
+Subject: Job 833903: </software/bioinformatics/slim-3.1/slim -d selectionstrength=0.8 -seed 323 fish_simulation.slim> Done
+
+Job </software/bioinformatics/slim-3.1/slim -d selectionstrength=0.8 -seed 323 fish_simulation.slim> was submitted from host <aklppf31> by user <hrafxc>.
+Job was executed on host(s) <wkoppb42>, in queue <lowpriority>, as user <hrafxc>.
+</home/hrafxc> was used as the home directory.
+</workspace/hrafxc/SummerResearch/SLiM> was used as the working directory.
+Started at Thu Jan 21 18:03:07 2021
+Results reported at Thu Jan 21 18:03:08 2021
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/software/bioinformatics/slim-3.1/slim -d selectionstrength=0.8 -seed 323 fish_simulation.slim
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :      0.07 sec.
+    Max Memory :         4 MB
+    Max Swap   :       157 MB
+
+    Max Processes  :         1
+
+The output (if any) is above this job summary.
+

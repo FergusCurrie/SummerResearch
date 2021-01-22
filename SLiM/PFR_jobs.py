@@ -14,31 +14,27 @@ def sub_job(seed):
     
     mkdir -p $OUTPUT
    
-    for x in {{v1}..{v1}}
-    do 
-	bsub -o {v2} /software/bioinformatics/slim-3.1/slim -d selectionstrength=0.8 -seed $x fish_simulation.slim;
-    done 
+    bsub -o {v2} python3 moo.py {v1}; 
 	
     """.format(
         v1 = seed,
-        v2 = "${OUTPUT}/${x}.out"
+        v2 = "${OUTPUT}/"+str(seed)+".out"
     ))
 
 def make_all_jobs():
     # Makes system calls of a bunch of jobs
     path = "results/"+str(datetime.datetime.now()) + "_results"
-    os.mkdir(path)
+    #os.mkdir(path)
     for seed in open("seeds/algorithm_seed.txt"):
         seed = int(seed.strip())
         sub_job(seed)
         # Make a job
 
 
-
-if False:
-    make_all_jobs()
 if True:
-    sub_job()
+    make_all_jobs()
+if False:
+    sub_job(323)
 
 
 

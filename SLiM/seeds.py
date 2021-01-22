@@ -24,17 +24,10 @@ def make_sets():
 
     # Seed algorithm
     file = open("seeds/algorithm_seed.txt", "w")
-    for x in range(0, 10):
+    for x in range(0, num_seeds):
         file.write(str(z))
         z += zi
         file.write("\n")
-
-make_sets()
-
-
-
-
-
 
 
 
