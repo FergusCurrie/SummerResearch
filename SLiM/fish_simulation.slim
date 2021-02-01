@@ -1,10 +1,11 @@
-// $ slim -d selectionstrength=0.2 -d pop_size=1000 -d early=100 -d late=4000 fish_simulation.slim
 // early = 502 , late = 510 
 // decide on population size 
+
 initialize() {
  initializeMutationRate(1e-7);
+ setSeed(54321);
  initializeMutationType("m1", 0.5, "f", 0.0); // neutral
- initializeMutationType("m2", 0.5, "n", selectionstrength, 0.5); // QTLs
+ initializeMutationType("m2", 0.5, "n", 0.2, 0.5); // QTLs
 m2.convertToSubstitution = F;
  initializeGenomicElementType("g1", m1, 1);
  initializeGenomicElementType("g2", m2, 1);
@@ -16,7 +17,7 @@ m2.convertToSubstitution = F;
 
 
 fitness(m2) { return 1.0; }
-1 { sim.addSubpop("p1", 100); }
+1 { sim.addSubpop("p1", 500); }
 1:499{
 	// Initial populations with stabilising selection 
 	inds = sim.subpopulations.individuals;
@@ -25,6 +26,8 @@ fitness(m2) { return 1.0; }
  	inds.fitnessScaling = 1.0 + dnorm(phenotypes, 5.0, 2.0) / scale;
 }
 500: late() {
+	setSeed(lateSeed);
+	sim.mutationsOfType(m2).setSelectionCoeff(selectionstrength);
 	inds = sim.subpopulations.individuals;
  	phenotypes = inds.sumOfMutationsOfType(m2);
  	inds.fitnessScaling = 1.0 + phenotypes * 0.12; 
