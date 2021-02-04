@@ -14,8 +14,8 @@ def call_slim(selection_coeff):
     sum = [0, 0]
     for seed in open("seeds/slim_seed_train.txt", "r"):
         c += 1
-        #cmd = "/software/bioinformatics/slim-3.1/slim -d selectionstrength=" + str(selection_coeff) + " -d lateSeed=" + str(seed).strip() + " fish_simulation.slim"
-        cmd = "slim -d selectionstrength=" + str(selection_coeff) +" -d lateSeed="+str(seed).strip()+" fish_simulation.slim"
+        cmd = "/software/bioinformatics/slim-3.1/slim -d selectionstrength=" + str(selection_coeff) + " -d lateSeed=" + str(seed).strip() + " fish_simulation.slim"
+        #cmd = "slim -d selectionstrength=" + str(selection_coeff) +" -d lateSeed="+str(seed).strip()+" fish_simulation.slim"
         process = subprocess.run(cmd, shell=True, check=True, timeout=10,stdout=subprocess.PIPE)
         f = []
         for x in process.stdout.split():
