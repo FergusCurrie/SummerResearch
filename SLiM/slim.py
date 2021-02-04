@@ -38,5 +38,5 @@ def late_fitness(args) -> float:
     return float(c)
 
 
-
+print(call_slim(0.8))
 

@@ -6,9 +6,23 @@ while non_terminated:
 		until enough offspring created:
 		    init empty offspring
 			until have enough offspring:
-				binary tournament selection (fixed for nsga2)
-				crossover ( default SinmulatedBinaryCrossOver)
-				mutation ( default PolynomialMutation)
+				binary tournament selection
+				    resulting array of parents index chosen for mating
+				SimulatedBinaryCrossover <- parents_index, prob_per_var=1
+                    crossover on parents_index generated in tournament selection
+                    X : resulting array = (2,num_mating,num_decision_vars)
+                    create a mask : 'do_crossover' (num_mating,num_decision_vars) filled with True/False, True proportional to prob_per_var
+                                    AND False is x[0] , x[1] are too close together
+                    calculate a simulated binary cross, using randomness, between the two points (refer to distribution)
+                    apply the mask so that only a proportion of mating pairs has crossover applied to
+                        creates new population _X
+				do PolynomialMutation on : population with prob= prob of mutation and eta=degree polynomial, problem XL & XU
+                    with array of individuals -> e.g. [  [[0.1],[0.2],[0.3]] , [[0.7],[0.8],[0.9]]  ] (3D) ()
+                    apply a mask so that only a proportion (relative to $prob) will keep the following mutation:
+                        _Y = apply_polynomial(X) -> (refer to distribution_polynomial)
+                        (_Y => array with same shape as X with rand half using first mutation, other half using second mutation)
+                    Y[only masks based on $prob] = put_in_bounds(_Y)
+                    return Y
 				eliminate_duplicates
 				randomly cull if too large
 				merge to offspring
@@ -36,37 +50,9 @@ while non_terminated:
 
 
 
-
-# prop_per_var =1.0 for n_dv = 1
-SimulatedBinaryCrossover <- parents_index, prob_per_var
-    do_crossover on parents_index generated in tournament selection
-    X : resulting array = (2,num_mating,num_decision_vars)
-    create a mask : 'do_crossover' (num_mating,num_decision_vars) filled with T/F, T proportional to prob_per_var
-                    AND F is x[0] , x[1] are too close together
-    create a mask : 'random' (num_mating,num_decision_vars )
-    
-
-
-
-
-
-
-
-
-
-
-
-
 # This will work fine for our data!
 PolynomialMutation <- pop (population from crossover)
 
-do PolynomialMutation on : population with prob= prob of mutation and eta=degree polynomial, problem XL & XU
-    with array of individuals -> e.g. [  [[0.1],[0.2],[0.3]] , [[0.7],[0.8],[0.9]]  ] (3D) ()
-    apply a mask so that only a proportion (relative to $prob) will keep the following mutation:
-        _Y = apply_polynomial(X)
-        (_Y => array with same shape as X with rand half using first mutation, other half using second mutation)
-    Y[only masks based on $prob] = put_in_bounds(_Y)
-    return Y
 
 do apply_polynomial:
     using a second mask:
