@@ -35,7 +35,7 @@ def run_nsga(s):
                       crossover=get_crossover("real_sbx", prob=0.9, prob_per_variable=1.0),
                       mutation=get_mutation("real_pm", prob=0.8),
                       eliminate_duplicates=True)
-    termination = get_termination("n_gen",10)
+    termination = get_termination("n_gen",100)
     problem = FunctionalProblem(1,my_objs,xl=np.array([0]),xu=np.array([1]))
     result = minimize(problem,algorithm,termination,seed=int(s),save_history=True,verbose=True)
     print("function:"+str(result.F))
